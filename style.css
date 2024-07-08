@@ -6,6 +6,9 @@ input {
     border: solid black 1px;
     border-radius: 5px;
     font-size: large;
+    margin: 2px 50px;
+    padding: 1px 4px;
+
 }
 
 input:invalid {
@@ -29,7 +32,14 @@ legend {
     padding: 10% 5%;
 }
 
+label {
+    justify-self: center;
+}
+
 fieldset {
+    box-sizing: border-box;
+    padding: 6px 60px;
+    padding-bottom: 10px;
     width: 30vw;
     height: 50vh;
     display: flex;
@@ -47,4 +57,5 @@ fieldset {
     font-size: larger;
     border: solid grey 2px;
     border-radius: 6px;
+    cursor: pointer;
 }
