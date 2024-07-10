@@ -1,104 +1,35 @@
 import './style.css';
+import FormValidator from './FormValidator.js';
 
 const form = document.querySelector('#main-form');
-
-/*
- * const inputsIdList = [
- *     'email',
- *     'country',
- *     'ZIP',
- *     'password',
- *     'confirm-password'
- * ];
- */
+const submitBtn = document.querySelector('#submit-btn');
 
 const inputIdList = {
     'email': [
-        '[\w\d]*@[\w\d]*',
-        'Invalid input. Please try again.'
+        '[\w\d]*@[a-zA-Z]+',
+        'Invalid input. Please use the format a@a.'
     ],
     'country': [
         '^[a-zA-Z]*$',
         'Invalid input. Make sure there are only letters.'
     ],
     'ZIP': [
-        '[a-zA-Z]{1}[0-9]{1}[a-zA-Z]{1}-[0-9]{1}[a-zA-Z]{1}[0-9]{1}',
+        '[a-zA-Z]{1}[0-9]{1}[a-zA-Z]{1}-?[0-9]{1}[a-zA-Z]{1}[0-9]{1}',
         'Does not match the format for the country.'
     ],
     'password': [
-        'asd',
+        '^(?=.*[0-9]+)(?=.*[A-Z]+)(?=.*[a-z]+)([a-zA-Z0-9]+){8,}$',
         'Your password must be comprised of lower and upper case letters and contain at least one number.'
     ],
     'confirm-password': [
-        'none',
+        '',
         'Must match with the password entered above.'
     ]
 };
 
 
-class FormValidator {
-
-    constructor(inputList) {
-
-        for (const key in inputList) {
-
-            console.log(`${key} ${inputList[key][0]}`);
-            this.addFocusOutListener(
-                document.querySelector(`#${key}`),
-                inputList[key][0],
-                inputList[key][1]
-            );
-
-        }
-
-    }
-
-    addFocusOutListener(
-        inputElement, pattern, errorMessage
-    ) {
-
-        console.log(inputElement);
-
-        inputElement.addEventListener('focusout',
-            () => {
-
-                inputElement.setCustomValidity('');
-
-                if (!this.patternCheck(
-                    inputElement.value,
-                    pattern,
-                    errorMessage
-                )) {
-
-                    inputElement.setCustomValidity(errorMessage);
-                    inputElement.reportValidity();
-
-                }
-
-            });
-        inputElement.addEventListener('input',
-            function () {
-
-                inputElement.setCustomValidity('');
-
-            });
-
-    }
-
-    patternCheck(input, pattern) {
-
-        console.log(input);
-        const rx = new RegExp(pattern,
-            '');
-        console.log(rx);
-        return rx.test(input);
-
-    }
-
-}
-
-
-const formV = new FormValidator(inputIdList);
+const formV = new FormValidator('main-form',
+    inputIdList);
 
 class InputField {
 
@@ -173,8 +104,6 @@ class InputField {
  * inputs.forEach((element) => addOnFocusOut(element))
  * focusout
  */
-
-const submitBtn = document.querySelector('#submit-btn');
 
 
 // on focus out, run the validation for that specific input
