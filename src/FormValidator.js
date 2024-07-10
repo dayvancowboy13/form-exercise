@@ -5,7 +5,6 @@ export default class FormValidator {
         // add listeners to each input element
         for (const key in inputList) {
 
-            // console.log(`${key} ${inputList[key][0]}`);
             this.addFocusOutListener(
                 document.querySelector(`#${key}`),
                 inputList[key][0],
@@ -14,7 +13,7 @@ export default class FormValidator {
 
 
         }
-        // const submitBtn = document.querySelector('#submit-btn');
+
         const form = document.querySelector(`#${formID}`);
 
         form.addEventListener('submit',
@@ -24,7 +23,6 @@ export default class FormValidator {
                 if (!form.checkValidity()) {
 
                     console.log('something wrong!');
-                    // console.log(typeof form);
                     this.checkInputs(formID);
 
                 } else {
@@ -82,7 +80,6 @@ export default class FormValidator {
                     errorMessage
                 )) {
 
-                    // console.log(inputElement.validity);
                     inputElement.setCustomValidity(errorMessage);
                     inputElement.reportValidity();
                     return;
